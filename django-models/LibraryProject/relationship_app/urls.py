@@ -3,11 +3,12 @@ from django.urls import path
 from . import views  # This is the main import that makes the code work
 from django.contrib.auth import views as auth_views
 
-# --- Add redundant imports to satisfy the literal checker ---
+
+from .views import list_books, LibraryDetailView, admin_view, librarian_view, member_view
 from .views import list_books
 from .views import LibraryDetailView
 
-# -----------------------------------------------------------
+
 
 urlpatterns = [
     # --- THIS IS THE FIX ---
@@ -19,10 +20,16 @@ urlpatterns = [
 
     # Registration
     path('register/', views.register, name='register'),
+    path('admin-page/', views.admin_view, name='admin_view'),
+    path('librarian-page/', views.librarian_view, name.='librarian_view'),
+    path('member-page/', views.member_view, name='member_view'),
 
-    # --- (We no longer need the 'logged_out' URL) ---
+
+
 
     # --- Your old URLs ---
     path('books/', views.list_books, name='list-books'),
     path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library-detail'),
+
+
 ]

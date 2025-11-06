@@ -7,8 +7,21 @@ from .models import Library
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
+
+def is_admin(user):
+    """Checks if the user is an Admin."""
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
+
+def is_librarian(user):
+    """Checks if the user is a Librarian."""
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
+
+def is_member(user):
+    """Checks if the user is a Member."""
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
 
 
 # 1. Implement Function-based View (FBV)
@@ -48,3 +61,39 @@ def register(request):
         form = UserCreationForm()
 
     return render(request, 'relationship_app/register.html', {'form': form})
+
+# 4. Role-Based Views
+
+@login_required
+@user_passes_test(is_admin, login_url='/relations/login/') # Redirect non-admins
+def admin_view(request):
+    # The file name is 'admin_view.html' as requested
+    return render(request, 'relationship_app/admin_view.html')
+
+@login_required
+@user_passes_test(is_librarian, login_url='/relations/login/') # Redirect non-librarians
+def librarian_view(request):
+    return render(request, 'relationship_app/librarian_view.html')
+
+@login_required
+@user_passes_test(is_member, login_url='/relations/login/') # Redirect non-members
+def member_view(request):
+    return render(request, 'relationship_app/member_view.html')
+
+# 4. Role-Based Views
+
+@login_required
+@user_passes_test(is_admin, login_url='/relations/login/') # Redirect non-admins
+def admin_view(request):
+    # The file name is 'admin_view.html' as requested
+    return render(request, 'relationship_app/admin_view.html')
+
+@login_required
+@user_passes_test(is_librarian, login_url='/relations/login/') # Redirect non-librarians
+def librarian_view(request):
+    return render(request, 'relationship_app/librarian_view.html')
+
+@login_required
+@user_passes_test(is_member, login_url='/relations/login/') # Redirect non-members
+def member_view(request):
+    return render(request, 'relationship_app/member_view.html')
