@@ -126,4 +126,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/relations/books/'
 
 # Redirect to our 'logged_out' page after a successful logout
-LOGOUT_REDIRECT_URL = '/relations/logged_out/'
+# LOGOUT_REDIRECT_URL = '/relations/logged_out/'
