@@ -4,7 +4,8 @@ from . import views  # This is the main import that makes the code work
 from django.contrib.auth import views as auth_views
 
 
-from .views import list_books, LibraryDetailView, admin_view, librarian_view, member_view
+# Find this line and add the new views
+from .views import list_books, LibraryDetailView, admin_view, librarian_view, member_view, book_add, book_edit, book_delete
 from .views import list_books
 from .views import LibraryDetailView
 
@@ -21,7 +22,7 @@ urlpatterns = [
     # Registration
     path('register/', views.register, name='register'),
     path('admin-page/', views.admin_view, name='admin_view'),
-    path('librarian-page/', views.librarian_view, name.='librarian_view'),
+    path('librarian-page/', views.librarian_view, name='librarian_view'),
     path('member-page/', views.member_view, name='member_view'),
 
 
@@ -30,6 +31,9 @@ urlpatterns = [
     # --- Your old URLs ---
     path('books/', views.list_books, name='list-books'),
     path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library-detail'),
+    path('book/add/', views.book_add, name='book-add'),
+    path('book/<int:pk>/edit/', views.book_edit, name='book-edit'),
+    path('book/<int:pk>/delete/', views.book_delete, name='book-delete'),
 
 
 ]
