@@ -15,8 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include  # <-- 1. Add 'include'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # 2. Add this line to link to your app's urls.py
+    # You can visit your new views at e.g. /relations/books/
+    path('relations/', include('relationship_app.urls')),
 ]
