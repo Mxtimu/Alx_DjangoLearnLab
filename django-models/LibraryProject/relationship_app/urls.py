@@ -1,6 +1,13 @@
 # relationship_app/urls.py
 from django.urls import path
-from . import views
+from . import views  # This is the main import that makes the code work
+
+
+
+from .views import list_books
+from .views import LibraryDetailView
+
+
 
 urlpatterns = [
     # Route for the function-based view (list all books)
