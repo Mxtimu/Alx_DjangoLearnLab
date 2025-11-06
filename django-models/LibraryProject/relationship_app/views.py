@@ -1,26 +1,19 @@
 from django.shortcuts import render
-from django.views.generic import DetailView
+
+from django.views.generic.detail import DetailView
 
 from .models import Book
 from .models import Library
-
-
-
 
 # 1. Implement Function-based View (FBV)
 def list_books(request):
     """
     Lists all books stored in the database.
     """
-    # Get all book objects from the database
     books = Book.objects.all()
-
-    # Create a context dictionary to pass data to the template
     context = {
         'books': books
     }
-
-    # Render the request using our new template
     return render(request, 'relationship_app/list_books.html', context)
 
 
@@ -31,7 +24,4 @@ class LibraryDetailView(DetailView):
     """
     model = Library
     template_name = 'relationship_app/library_detail.html'
-
-    # Django's DetailView automatically finds the library by its <pk>
-    # and passes it to the template as 'library' (or 'object')
     context_object_name = 'library'
