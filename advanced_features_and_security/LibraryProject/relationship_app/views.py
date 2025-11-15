@@ -27,7 +27,7 @@ def is_member(user):
 
 
 # 1. Implement Function-based View (FBV)
-@permission_required('relationship_app.can_view', login_url='/relations/login/')
+@permission_required('bookshelf.can_view', login_url='/relations/login/')
 def list_books(request):
     """
     Lists all books stored in the database.
@@ -103,7 +103,7 @@ def member_view(request):
 
 # 5. Secured CRUD Views for Books
 
-@permission_required('relationship_app.can_create', login_url='/relations/login/')
+@permission_required('bookshelf.can_create', login_url='/relations/login/')
 def book_add(request):
     if request.method == 'POST':
         form = BookForm(request.POST)
@@ -115,7 +115,7 @@ def book_add(request):
     return render(request, 'relationship_app/book_form.html', {'form': form})
 
 # @permission_required('relationship_app.can_change_book', login_url='/relations/login/')
-@permission_required('relationship_app.can_edit', login_url='/relations/login/')
+@permission_required('bookshelf.can_edit', login_url='/relations/login/')
 def book_edit(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
@@ -128,7 +128,7 @@ def book_edit(request, pk):
     return render(request, 'relationship_app/book_form.html', {'form': form})
 
 # @permission_required('relationship_app.can_delete_book', login_url='/relations/login/')
-@permission_required('relationship_app.can_delete', login_url='/relations/login/')
+@permission_required('bookshelf.can_delete', login_url='/relations/login/')
 def book_delete(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
