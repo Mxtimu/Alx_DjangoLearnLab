@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Example</title>
+</head>
+<body>
+    <h1>Example Security Form</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if query %}
+        <h2>You searched for: {{ query }}</h2>
+        <p>(This output is safely rendered by Django, preventing XSS.)</p>
+    {% endif %}
+</body>
+</html>

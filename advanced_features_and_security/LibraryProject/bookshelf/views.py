@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import permission_required
 from .models import Book  # Imports from this app's models
-from .forms import BookForm  # Imports from this app's forms
+from .forms import BookForm, ExampleForm  # Imports from this app's forms
 
 # 1. Book List View
 # FIX: Renamed to book_list and added raise_exception
@@ -58,3 +58,23 @@ def book_delete(request, pk):
         return redirect('book-list')
     # FIX: Points to new template location
     return render(request, 'bookshelf/book_confirm_delete.html', {'book': book})
+# 5.. Example Security View
+def form_example_view(request):
+    """
+    This view uses ExampleForm to demonstrate secure handling.
+    """
+    query = None
+    if request.method == 'POST':
+        # 1. The form validates and sanitizes the input
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            # 2. We access the *cleaned* data, which is safe from
+            #    SQL injection or XSS.
+            query = form.cleaned_data['query']
+    else:
+        form = ExampleForm()
+
+    return render(request, 'bookshelf/form_example.html', {
+        'form': form,
+        'query': query
+    })
