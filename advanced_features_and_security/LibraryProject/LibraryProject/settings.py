@@ -31,9 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts',
-    'relationship_app',
     'bookshelf',
+    'relationship_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,7 +128,7 @@ LOGIN_REDIRECT_URL = '/relations/books/'
 # Redirect to our 'logged_out' page after a successful logout
 # LOGOUT_REDIRECT_URL = '/relations/logged_out/'
 # Step 2: Set the custom user model
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
 # Media files (for profile_photo)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
