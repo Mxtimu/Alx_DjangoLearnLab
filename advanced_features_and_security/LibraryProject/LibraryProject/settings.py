@@ -140,7 +140,21 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # served. This is for production. You must set to True for development.
 DEBUG = False
 
+# --- HTTPS Redirect & HSTS (NEW SETTINGS) ---
 
+# This redirects all non-HTTPS (http://) requests to HTTPS (https://)
+# WARNING: This will make your local 'runserver' unusable.
+SECURE_SSL_REDIRECT = True
+
+# HTTP Strict Transport Security (HSTS) - Tells the browser to
+# *only* ever use HTTPS for your site for the next year.
+SECURE_HSTS_SECONDS = 31536000  # (1 year)
+
+# Applies HSTS to all subdomains (e.g., blog.your_domain.com)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# Allows your site to be "preloaded" into browser HSTS lists
+SECURE_HSTS_PRELOAD = True
 
 # Enforces XSS protection in older browsers
 SECURE_BROWSER_XSS_FILTER = True
