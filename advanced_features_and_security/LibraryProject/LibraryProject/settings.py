@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'csp.middleware.CSPMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -132,3 +133,35 @@ AUTH_USER_MODEL = 'bookshelf.CustomUser'
 # Media files (for profile_photo)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+
+# WARNING: Setting DEBUG = False will stop static files from being
+# served. This is for production. You must set to True for development.
+DEBUG = False
+
+
+
+# Enforces XSS protection in older browsers
+SECURE_BROWSER_XSS_FILTER = True
+
+# Prevents clickjacking by stopping your site from being loaded in an <iframe>
+X_FRAME_OPTIONS = 'DENY'
+
+# Prevents the browser from guessing the content-type, stops XSS.
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Cookie Security
+
+# WARNING: Setting these to True will break login on local 'http://'
+# These force cookies to only be sent over 'https://'
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# Content Security Policy (CSP)
+# This tells the browser to only load content (scripts, styles)
+# from our own domain ('self') and from a trusted CDN (like Bootstrap/jQuery)
+
+CSP_DEFAULT_SRC = ("'self'", "code.jquery.com", "cdn.jsdelivr.net")
+CSP_STYLE_SRC = ("'self'", "cdn.jsdelivr.net")
+CSP_SCRIPT_SRC = ("'self'", "code.jquery.com", "cdn.jsdelivr.net")

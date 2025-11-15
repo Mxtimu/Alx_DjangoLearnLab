@@ -12,6 +12,13 @@ def book_list(request):
     # FIX: Points to new template location
     return render(request, 'bookshelf/book_list.html', {'books': books})
 
+# STEP 3: SECURE DATA ACCESS
+#comments for myself:
+# The view below is secure against SQL injection because it uses
+# Django's forms. The `form.is_valid()` call validates and sanitizes
+# all user input from `request.POST` before it is used to save
+# data to the database, preventing injection attacks.
+
 # 2. Book Add View
 # FIX: Added raise_exception
 @permission_required('bookshelf.can_create', login_url='/relations/login/', raise_exception=True)
