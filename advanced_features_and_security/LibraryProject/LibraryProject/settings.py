@@ -172,6 +172,12 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
+# Reverse Proxy Header (NEW SETTING)
+# This jsut tells Django to trust the 'X-Forwarded-Proto' header
+# from your proxy (like Nginx or Heroku) to determine if
+# the request is secure (https).
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # Content Security Policy (CSP)
 # This tells the browser to only load content (scripts, styles)
 # from our own domain ('self') and from a trusted CDN (like Bootstrap/jQuery)
