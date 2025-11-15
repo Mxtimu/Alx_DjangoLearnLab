@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include  # <-- 1. Add 'include'
 
+
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # 2. Add this line to link to your app's urls.py
-    # You can visit your new views at e.g. /relations/books/
     path('relations/', include('relationship_app.urls')),
+    path('books/', include('bookshelf.urls')), # <-- ADD THIS LINE
 ]

@@ -21,12 +21,12 @@ urlpatterns = [
     path('member-page/', views.member_view, name='member_view'),
 
     # Original App URLs
-    path('books/', views.list_books, name='list-books'),
+    # path('books/', views.list_books, name='list-books'),
     path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library-detail'),
 
 
     # Changed paths to match the checker's literal strings
-    path('add_book/', views.book_add, name='book-add'),
-    path('edit_book/<int:pk>/', views.book_edit, name='book-edit'),
-    path('delete_book/<int:pk>/', views.book_delete, name='book-delete'),
+    # path('add_book/', views.book_add, name='book-add'),
+    # path('edit_book/<int:pk>/', views.book_edit, name='book-edit'),
+    # path('delete_book/<int:pk>/', views.book_delete, name='book-delete'),
 ]

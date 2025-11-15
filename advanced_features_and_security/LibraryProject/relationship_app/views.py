@@ -10,8 +10,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.contrib.auth.decorators import permission_required
-from django.shortcuts import get_object_or_404
-from .forms import BookForm
+
 
 def is_admin(user):
     """Checks if the user is an Admin."""
@@ -28,15 +27,15 @@ def is_member(user):
 
 # 1. Implement Function-based View (FBV)
 @permission_required('bookshelf.can_view', login_url='/relations/login/')
-def list_books(request):
-    """
-    Lists all books stored in the database.
-    """
-    books = Book.objects.all()
-    context = {
-        'books': books
-    }
-    return render(request, 'relationship_app/list_books.html', context)
+# def list_books(request):
+#     """
+#     Lists all books stored in the database.
+#     """
+#     books = Book.objects.all()
+#     context = {
+#         'books': books
+#     }
+#     return render(request, 'relationship_app/list_books.html', context)
 
 
 # 2. Implement Class-based View (CBV)
@@ -103,35 +102,35 @@ def member_view(request):
 
 # 5. Secured CRUD Views for Books
 
-@permission_required('bookshelf.can_create', login_url='/relations/login/')
-def book_add(request):
-    if request.method == 'POST':
-        form = BookForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('list-books')
-    else:
-        form = BookForm()
-    return render(request, 'relationship_app/book_form.html', {'form': form})
-
-# @permission_required('relationship_app.can_change_book', login_url='/relations/login/')
-@permission_required('bookshelf.can_edit', login_url='/relations/login/')
-def book_edit(request, pk):
-    book = get_object_or_404(Book, pk=pk)
-    if request.method == 'POST':
-        form = BookForm(request.POST, instance=book)
-        if form.is_valid():
-            form.save()
-            return redirect('list-books')
-    else:
-        form = BookForm(instance=book)
-    return render(request, 'relationship_app/book_form.html', {'form': form})
-
-# @permission_required('relationship_app.can_delete_book', login_url='/relations/login/')
-@permission_required('bookshelf.can_delete', login_url='/relations/login/')
-def book_delete(request, pk):
-    book = get_object_or_404(Book, pk=pk)
-    if request.method == 'POST':
-        book.delete()
-        return redirect('list-books')
-    return render(request, 'relationship_app/book_confirm_delete.html', {'book': book})
+# @permission_required('bookshelf.can_create', login_url='/relations/login/')
+# def book_add(request):
+#     if request.method == 'POST':
+#         form = BookForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('list-books')
+#     else:
+#         form = BookForm()
+#     return render(request, 'relationship_app/book_form.html', {'form': form})
+#
+# # @permission_required('relationship_app.can_change_book', login_url='/relations/login/')
+# @permission_required('bookshelf.can_edit', login_url='/relations/login/')
+# def book_edit(request, pk):
+#     book = get_object_or_404(Book, pk=pk)
+#     if request.method == 'POST':
+#         form = BookForm(request.POST, instance=book)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('list-books')
+#     else:
+#         form = BookForm(instance=book)
+#     return render(request, 'relationship_app/book_form.html', {'form': form})
+#
+# # @permission_required('relationship_app.can_delete_book', login_url='/relations/login/')
+# @permission_required('bookshelf.can_delete', login_url='/relations/login/')
+# def book_delete(request, pk):
+#     book = get_object_or_404(Book, pk=pk)
+#     if request.method == 'POST':
+#         book.delete()
+#         return redirect('list-books')
+#     return render(request, 'relationship_app/book_confirm_delete.html', {'book': book})
