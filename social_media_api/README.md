@@ -10,3 +10,10 @@
 * **Register:** POST /api/users/register/ (Returns Token)
 * **Login:** POST /api/users/login/ (Returns Token)
 * **Profile:** GET/PUT /api/users/profile/ (Requires Token)
+
+## Posts & Comments
+* **List Posts:** GET /api/posts/ (Supports pagination & search: ?search=keyword)
+* **Create Post:** POST /api/posts/
+* **Post Details:** GET /api/posts/{id}/
+* **Update/Delete Post:** PUT/DELETE /api/posts/{id}/ (Author only)
+* **Comments:** CRUD operations at /api/comments/
