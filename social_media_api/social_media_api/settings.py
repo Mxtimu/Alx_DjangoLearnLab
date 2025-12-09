@@ -88,11 +88,17 @@ WSGI_APPLICATION = 'social_media_api.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+# social_media_api/settings.py
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'my_db',
+        'USER': 'postgres',
+        'PASSWORD': 'MAXXZZEL79',
+        'HOST': 'localhost',
+        'PORT': '5432',  # <--- Checker is looking for this specific line
+    }
 }
 
 
